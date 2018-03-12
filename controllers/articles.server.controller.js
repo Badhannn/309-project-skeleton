@@ -3,7 +3,14 @@ var Article = require('./../models/Article.js');
 var errorHandler = require('./errors.server.controller');
 var _ = require('lodash');
 
-module.exports.list = function(req, res) {
+module.exports.singleView = function(req,res){
+  res.render('./../public/views/article/view.ejs',{
+  user:req.user || null,
+  request:req
+  });
+}
+
+module.exports.listView = function(req, res) {
   Article.find(function(err, data) {
     if (err) {
       return res.status(400).send({
@@ -17,6 +24,13 @@ module.exports.list = function(req, res) {
     }
   });
 };
+
+/*module.exports.singleView = function(req,res){
+  res.render('./../public/views/article/view.ejs',{
+  user:req.user || null,
+  request:req
+  });
+}*/
 
 module.exports.create = function(req, res) {
   var article = new Article(req.body);
