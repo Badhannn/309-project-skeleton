@@ -4,7 +4,8 @@
     </head>
     <body>
         <h1>Create New Product</h1>
-        <p>Contect</p>
+        <p>Name</p>
+        
         <textarea id="contect">Add Contact </textarea> <br/>
         
         
@@ -15,5 +16,19 @@
             newProduct.contect = $('#contect').val();
             $.ajax({
             method
+            
+            
+            newProduct.price= $('#price').val();
+            newProduct.quantity= $('#quantity').val();
+            $.ajax({
+                method:"POST",
+                url: "/api/products",
+                data:newProduct
+            }).done(function(response){
+                console.log(response);
+                window.location.replace
+            }).fail(function(response){
+                $('#error').text(JSON.parse(response.responseText).message);
+                 console.log(response.responseText);
     </body>
 </html>
